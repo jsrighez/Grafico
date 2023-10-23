@@ -1,0 +1,28 @@
+<!-- criar para escolher dados do gráfico
+precisa criar ja para fazer as variaveis -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Coluna</title>
+</head>
+<body>
+
+    <h1>Selecione uma Coluna</h1>
+    
+    <form action="/processar-selecao" method="post">
+        <label for="coluna">Escolha uma coluna:</label>
+        <select id="coluna" name="coluna">
+            <option value="nome">Nome</option>
+            <option value="email">Email</option>
+            <option value="idade">Idade</option>
+            <option value="sexo">Sexo</option>
+            <!-- Adicione mais opções conforme necessário -->
+        </select><br>
+
+        <button type="submit">Selecionar</button>
+    </form>
+
+</body>
+</html>

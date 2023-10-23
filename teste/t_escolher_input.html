@@ -1,0 +1,34 @@
+<!-- criar para escolher dados do gráfico
+precisa criar ja para fazer as variaveis -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tela inserir informações para Gráfico</title>
+    <link rel="stylesheet" href="styleg.css">
+</head>
+<body class="input">
+    <div class="dprincipais"></div>
+    <h1 class="inserir">Insira informações para o seu gráfico:</h1>
+    <p class="obs">OBS: É opcional colocar um segundo dado para o gráfico</p>
+    <form class="form">
+        <label for="título">Título:</label>
+        <input type="text" id="titulo" name="titulo_g" required>
+        <br>
+        
+        <label for="dado1">Dado 1 (nome da coluna):</label>
+        <input type="text" id="dado1" name="dado1" required>
+        <br>
+        
+        <label for="dado2">Dado 2 (nome da coluna):</label>
+        <input type="text" id="dado2" name="dado2">
+        <br>
+        <p class="tipog">Escolha um tipo de gráfico:</p>
+        <select id="tipo_g" name="tipo_g" placeholder= 'Tipo de Gráfico'required>
+            <option value="barra">Barra</option>
+            <option value="pizza">Pizza</option>
+            <option value="coluna">Coluna</option>
+        </select>
+    </form>
+    </div>
+</body>
+</html>

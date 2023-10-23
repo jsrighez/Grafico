@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Dados Gráfico</title>
+    <link rel="stylesheet" href="styleg.css">
+</head>
+<body class="input">
+    <div class="formulario">
+        <h1 class="inserir">Insira informações para o seu gráfico:</h1>
+    <p class="obs">OBS: É opcional colocar um segundo dado para o gráfico, sendo este precisando ter uma condição.</p>
+        <div>
+        <form>
+            <label for="título">Título:</label>
+            <input type="text" id="titulo" name="titulo_g" required>
+            <p class="tipog">Escolha um tipo de gráfico:</p>
+            <select id="tipo_g" name="tipo_g" placeholder= 'Tipo de Gráfico'required>
+                <option value="barra">Barra</option>
+                <option value="pizza">Pizza</option>
+                <option value="coluna">Coluna</option>
+            </select>
+            <br>
+            <br>
+            <label for="dado1">Dado 1 (nome da coluna):</label>
+            <input type="text" id="dado1" name="dado1" required>
+            <br>
+            <label for="dado2">Dado 2 (nome da coluna):</label>
+            <input type="text" id="dado2" name="dado2">
+            <br>
+            <div id="dynamicFields"></div>
+    
+            <button type="button" class="buttonmais buttonmais-left" onclick="addInput()">Condição:</button>
+        </form>  
+            <br>
+            <div>
+            <button class= "env" id="enviarg" type="submit">Enviar</button>
+            </div>
+            <br>
+        
+            </div>
+        <script>
+           let dynamicFieldCount = 0;
+
+            function addInput() {
+            dynamicFieldCount++;
+            const dynamicFields = document.getElementById('dynamicFields');
+    
+    // Crie um rótulo (label) para o campo.
+            const label = document.createElement('label');
+            label.textContent = 'Condição ' + dynamicFieldCount + ':';
+            dynamicFields.appendChild(label);
+
+    // Crie um campo de entrada.
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'campo_' + dynamicFieldCount;
+            dynamicFields.appendChild(input);
+
+    // Adicione uma quebra de linha.
+            dynamicFields.appendChild(document.createElement('br'));
+}
+        </script>
+    </div>
+</body>
+</html>

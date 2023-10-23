@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar arquivo</title>
+    <link rel="stylesheet" href="styleg.css">
+
+</head>
+<body class = "import">
+    <div class="narquivo">
+        <form action="processar-arquivo.php" method="post" enctype="multipart/form-data">
+        <div class="selecionar">
+                 <!-- Campo de entrada de arquivo oculto -->
+            <p class="comando">Selecione a planilha para fazer o seu gráfico:</p>
+            <br>
+            <input type="file" id="arquivo" name="arquivo" accept=".xlsx,.xls,.xlsb,.xlsm,.xlt" class="custom-file-input">
+        
+            <label for="arquivo" class="custom-button">Planilha</label>
+        </div>
+            <div class="send">
+                <input id="enviara" type="submit" value="Enviar" class = "custum-button-send">
+                <!-- falta ir para outra página com o arquivo -->
+                <!-- função de arrastar arquivo -->
+            </div>
+
+                <div class="imgg">
+                    <img src="pontos.gif" alt="grafico" width="35%" height="auto"> 
+                </div>
+        </form>
+    </div> 
+</body>
+</html>
