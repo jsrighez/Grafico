@@ -6,28 +6,56 @@ DATA_BASE = "verceldb"
 USER = "default"
 PASS = "xXxXxXxXxXxXxXxXxXxXxXxXxXxXx"
 
-class User:
-    def __init__(self, id, name, email):
-        self.id = id
-        self.name = name
+class Us:
+    def __init__(self,email,senha):
         self.email = email
+        self.senha = senha
 
-class Processo:
-    def __init__(self, id, processo, data, descricao, status):
-        self.id = id
-        self.processo = processo
-        self.data = data
-        self.descricao = descricao
-        self.status = status
+#arquivo
+class Arquivo:
+    def __init__(self, nome_arquivo,tipo_arq):
+        self.nome_arquivo = nome_arquivo
+        self.tipo_arq = tipo_arq
 
-class Post:
-    def __init__(self, id, title, content, user_id, status, data):
-        self.id = id
-        self.title = title
-        self.content = content
-        self.user_id = user_id
-        self.status = status
-        self.datapost = data
+#dados principais
+class Dados_Grafico:
+    def __init__(self,dado1,dado2,titulo_g,tipo_g,condicao1,condicao2):
+        self.titulo_g = titulo_g
+        self.tipo_g = tipo_g
+        self.dado1 = dado1
+        self.dado2 = dado2
+        self.condicao1 = condicao1
+        self.condicao2 = condicao2
+
+#Precisa desses?
+class Grafico_coluna(Dados_Grafico):
+    def __init__(self,tituloc_d1,tituloc_d2):
+        self.tituloc_d1 = tituloc_d1
+        self.tituloc_d2 = tituloc_d2
+
+class Grafico_barra(Dados_Grafico):
+    def __init__(self,titulob_d1,titulob_d2):
+        self.titulob_d1 = titulob_d1
+        self.titulob_d2 = titulob_d2
+
+class Grafico_pizza(Dados_Grafico):
+    def __init__(self,titulop_d1,titulop_d2):
+        self.titulop_d1 = titulop_d1
+        self.titulop_d2 = titulop_d2
+
+#Apenas uma coluna
+
+class Grafico_coluna1(Dados_Grafico):
+    def __init__(self,tituloc_d):
+        self.tituloc_d = tituloc_d
+
+class Grafico_barra1(Dados_Grafico):
+    def __init__(self,titulob_d):
+        self.titulob_d = titulob_d
+class Grafico_pizza1(Dados_Grafico):
+    def __init__(self,titulop_d):
+        self.titulop_d = titulop_d
+        
 
 def create_table():
     try:
@@ -42,10 +70,8 @@ def create_table():
         # Cria a tabela
         cur = conn.cursor()
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL
+            CREATE TABLE IF NOT EXISTS us (
+               
             )
         """)
         conn.commit()

@@ -2,7 +2,7 @@
 #MODEL
 #import psycopg2
 #login
-class User:
+class Us:
     def __init__(self,email,senha):
         self.email = email
         self.senha = senha
