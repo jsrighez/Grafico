@@ -7,25 +7,28 @@ USER = "default"
 PASS = "xXxXxXxXxXxXxXxXxXxXxXxXxXxXx"
 
 class Us:
-    def __init__(self,email,senha):
+    def __init__(self,ucod,email,senha):
+        self.ucod = ucod
         self.email = email
         self.senha = senha
 
 #arquivo
 class Arquivo:
-    def __init__(self, nome_arquivo,tipo_arq):
+    def __init__(self, acod,nome_arquivo,tipo_arq):
+        self.acod = acod
         self.nome_arquivo = nome_arquivo
         self.tipo_arq = tipo_arq
 
 #dados principais
 class Dados_Grafico:
-    def __init__(self,dado1,dado2,titulo_g,tipo_g,condicao1,condicao2):
+    def __init__(self,acod,dado1,dado2,titulo_g,tipo_g,condicao1,condicao2):
         self.titulo_g = titulo_g
         self.tipo_g = tipo_g
         self.dado1 = dado1
         self.dado2 = dado2
         self.condicao1 = condicao1
         self.condicao2 = condicao2
+        self.acod = acod
 
 #Precisa desses?
 class Grafico_coluna(Dados_Grafico):
@@ -71,7 +74,9 @@ def create_table():
         cur = conn.cursor()
         cur.execute("""
             CREATE TABLE IF NOT EXISTS us (
-               
+                ucod SERIAL PRIMARY KEY,
+                email varchar(50) NOT NULL,
+                senha varchar(10) NOT NULL
             )
         """)
         conn.commit()
@@ -80,12 +85,10 @@ def create_table():
         # Cria a tabela
         x = conn.cursor()
         x.execute("""
-            CREATE TABLE IF NOT EXISTS processos (
-                id SERIAL PRIMARY KEY,
-                processo VARCHAR(255) NOT NULL,
-                data VARCHAR(255) NOT NULL,
-                descricao VARCHAR(255) NOT NULL,
-                status BOOLEAN NOT NULL
+            CREATE TABLE IF NOT EXISTS Arquivo (
+                acod SERIAL PRIMARY KEY,
+                nome_arquivo VARCHAR(50) NOT NULL,
+                tipo_arq VARCHAR(4) NOT NULL
             )
         """)
         conn.commit()
@@ -94,17 +97,102 @@ def create_table():
         # Cria a tabela post
         y = conn.cursor()
         y.execute("""
-            CREATE TABLE IF NOT EXISTS posts (
-                id SERIAL PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                datapost VARCHAR(255) NOT NULL,
-                content VARCHAR(255) NOT NULL,
-                status BOOLEAN NOT NULL,
-                user_id INTEGER NOT NULL
+            CREATE TABLE IF NOT EXISTS Dados_Graficos (
+                dgcod INTEGER NOT NULL,
+                titulo_g VARCHAR(50) NOT NULL,
+                tipo_g VARCHAR (6) NOT NULL,
+                dado_1 VARCHAR (100) NOT NULL,
+                dado_2 VARCHAR DEFAULT 's',
+                condicao1 VARCHAR (50) NOT NULL,
+                condicao2 VARCHAR(50),
+                acod INTEGER NOT NULL,
+                PRIMARY KEY(dgcod,acod),
+                FOREIGN KEY(acod) REFERENCES Arquivo(acod)
             )
         """)
         conn.commit()
         print("Tabela Post criada com sucesso!")
+
+        z = conn.cursor()
+        z.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_coluna (
+                colcod INTEGER NOT NULL,
+                tituloc_d1 VARCHAR(50),
+                tituloc_d2 VARCHAR (50),
+                dgcodc INTEGER,
+                PRIMARY KEY(colcod,dgcod),
+                FOREIGN KEY(dgcodc) REFERENCES Dados_Grafico(dgcod)
+          )
+        """)
+        conn.commit()
+        print("Tabela Post criada com sucesso!")
+
+        a = conn.cursor()
+        a.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_barra (
+                barcod INTEGER NOT NULL,
+                titulob_d1 VARCHAR(50),
+                titulob_d2 VARCHAR(50),
+                dgcodb INTEGER,
+                PRIMARY KEY(barcod,dgcodb),
+                FOREIGN KEY(dgcodb) REFERENCES Dados_Grafico(dgcod)
+            )
+        """)
+        conn.commit()
+        print("Tabela Post criada com sucesso!")
+
+        b= conn.cursor()
+        b.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_pizza (
+                pizcod INTEGER NOT NULL,
+                titulocp_d1 VARCHAR(50),
+                titulop_d2 VARCHAR(50),
+                dgcodp INTEGER,
+                PRIMARY KEY(pizcod,dgcodp),
+                FOREIGN KEY(dgcodp) references Dados_Grafico(dgcod)
+            )
+        """)
+        conn.commit()
+        print("Tabela Processo criada com sucesso!")
+
+        c= conn.cursor()
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_coluna1 (
+                col1cod INTEGER NOT NULL,
+                tituloc_d1 VARCHAR(50),
+                dgcodc1 INTEGER,
+                PRIMARY KEY(col1cod,dgcod),
+                FOREIGN KEY(dgcodc1) REFERENCES Dados_Grafico(dgcod)
+            )
+        """)
+        conn.commit()
+        print("Tabela Processo criada com sucesso!")
+
+        d= conn.cursor()
+        d.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_barra1 (
+                bar1cod INTEGER NOT NULL,
+                tituloc_d1 VARCHAR(50),
+                dgcodb1 INTEGER,
+                PRIMARY KEY(bar1cod,dgcodb1),
+                FOREIGN KEY(dgcodb1) REFERENCES Dados_Grafico(dgcod)
+            )
+        """)
+        conn.commit()
+        print("Tabela Processo criada com sucesso!")
+
+        e= conn.cursor()
+        e.execute("""
+            CREATE TABLE IF NOT EXISTS Grafico_pizza1 (
+                piz1cod INTEGER NOT NULL,
+                tituloc_d1 VARCHAR(50),
+                dgcodp1 INTEGER,
+                PRIMARY KEY(piz1cod,dgcodp1),
+                FOREIGN KEY(dgcodp1) REFERENCES Dados_Grafico(dgcod)
+            )
+        """)
+        conn.commit()
+        print("Tabela Processo criada com sucesso!")
 
     except psycopg2.Error as e:
         print("Erro ao criar tabela:", e)
@@ -114,7 +202,7 @@ def create_table():
         if conn is not None:
             conn.close()
 
-def insert_user(user):
+def insert_us(us):
     try:
         # Conecta no banco de dados
         conn = psycopg2.connect(
@@ -126,7 +214,7 @@ def insert_user(user):
 
         # Insere o usuário na tabela
         cur = conn.cursor()
-        cur.execute("INSERT INTO users (name, email) VALUES (%s, %s)", (user.name, user.email))
+        cur.execute("INSERT INTO us (ucod, email, senha) VALUES (%s, %s,%s)", (us.ucod, us.email,us.senha))
         conn.commit()
         print("Usuário inserido com sucesso!")
 
@@ -138,7 +226,7 @@ def insert_user(user):
         if conn is not None:
             conn.close()
 
-def insert_processo(proc):
+def insert_arquivo(arq):
     try:
         # Conecta no banco de dados
         conn = psycopg2.connect(
@@ -150,7 +238,7 @@ def insert_processo(proc):
 
         # Insere o usuário na tabela
         cur = conn.cursor()
-        cur.execute("INSERT INTO processos (processo, data, descricao, status) VALUES (%s, %s, %s, %s)", (proc.processo, proc.data, proc.descricao, proc.status))
+        cur.execute("INSERT INTO processos (processo, data, descricao, status) VALUES (%s, %s, %s, %s)", (arq.processo, proc.data, proc.descricao, proc.status))
         conn.commit()
         print("Processo inserido com sucesso!")
 
@@ -276,18 +364,18 @@ def select_processos():
 create_table()
 
 # Insere um usuário
-user = User(None, "Aluno nota 10", "alunonota10@example.com")
-insert_user(user)
+us = Us(None, "Aluno nota 10", "alunonota10@example.com")
+insert_user(us)
 
 # id, processo, data, descricao, status
-proc = Processo(None, "Processo 1", "01/01/2021", "Teste", True)
-insert_processo(proc)
+ar = Arquivo(None, "Processo 1", "01/01/2021", "Teste", True)
+insert_arquivo(ar)
 
 # self, id, title, content, user_id, status, data):
-post = Post(None, "Post 2", "Esse dia foi louco",1, True, "01/01/2021")
-insert_post(post)
+dg = Dados_Grafico(None, "Post 2", "Esse dia foi louco",1, True, "01/01/2021")
+insert_post(dg)
 
 # Seleciona todos os usuários e exibe na tela
-select_users()
-select_processos()
+select_us()
+select_a()
 select_posts()
