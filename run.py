@@ -32,20 +32,23 @@ class Dados_Grafico:
 
 #Precisa desses?
 class Grafico_coluna(Dados_Grafico):
-    def __init__(self,tituloc_d1,tituloc_d2,dgcodc):
+    def __init__(self,tituloc_d1,tituloc_d2,dgcodc, colcod):
+        self.colcod = colcod
         self.tituloc_d1 = tituloc_d1
         self.tituloc_d2 = tituloc_d2
         self.dgcodc = dgcodc
 
 class Grafico_barra(Dados_Grafico):
-    def __init__(self,titulob_d1,titulob_d2,dgcodb):
+    def __init__(self,titulob_d1,titulob_d2,dgcodb, barcod):
         self.titulob_d1 = titulob_d1
+        self.barcod = barcod
         self.titulob_d2 = titulob_d2
         self.dgcodb = dgcodb
 
 
 class Grafico_pizza(Dados_Grafico):
-    def __init__(self,titulop_d1,titulop_d2,dgcodp):
+    def __init__(self,titulop_d1,titulop_d2,dgcodp, pizcod):
+        self.pizcod = pizcod
         self.titulop_d1 = titulop_d1
         self.titulop_d2 = titulop_d2
         self.dgcodp = dgcodp
@@ -513,7 +516,7 @@ def select_Dados_grafico():
             print(f"Código: {dg.dgcod}, Título gráfico: {dg.titulo_g}, Tipo do Gráfico: {dg.tipo_g}, Dado 1: {dg.dado_1}, Dado 2: {dg.dado_2}, Condição 1: {dg.condicao1}, Condição 2: {dg.condicao2}, Acod: {dg.acod}")
 
     except psycopg2.Error as e:
-        print("Erro ao selecionar usuários:", e)
+        print("Erro ao selecionar dados_grafico:", e)
 
     finally:
         # Fecha a conexão
@@ -691,9 +694,9 @@ def select_Grafico_pizza1():
 # Cria a tabela
 create_table()
 
-# Insere um usuário
+'''# Insere um usuário
 us = Us(None, "Aluno nota 10", "alunonota10@example.com")
-insert_user(us)
+insert_us(us)
 
 # id, processo, data, descricao, status
 ar = Arquivo(None, "Processo 1", "01/01/2021", "Teste", True)
@@ -701,9 +704,9 @@ insert_arquivo(ar)
 
 # self, id, title, content, user_id, status, data):
 dg = Dados_Grafico(None, "Post 2", "Esse dia foi louco",1, True, "01/01/2021")
-insert_post(dg)
+insert_dados_grafico(dg)
 
 # Seleciona todos os usuários e exibe na tela
 select_us()
 select_a()
-select_posts()
+select_posts()'''

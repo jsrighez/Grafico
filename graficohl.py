@@ -12,7 +12,7 @@ df = pd.read_excel("Leituras.xlsx")
 
 fig = px.pie(df, names='Você costuma ler?', title='Leitura por Gênero (Homens)')
 
-img = 'logo.png'
+
 
 title_style = {
     'font-family': 'Nunito',  # Defina a fonte desejada aqui
@@ -22,14 +22,12 @@ title_style = {
     }
 
 graphic.layout = html.Div(
-    style = {'display': 'flex', 'align-items': 'center'},
     children=[
     html.Link(
     rel='stylesheet',
     href='https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap',
     ),
-    html.Img(src=img, style={'max-width': '50px', 'height': '50px'}),
-    html.H1(children='Máquina de Gráficos', style=title_style),
+    html.H1(children='Máquina de Gráficos |||', style=title_style),
 
     dcc.Graph(
         id='grafico_leitura_genero_homens',

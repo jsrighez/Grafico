@@ -14,8 +14,20 @@ df = your_database_library.connect_to_database()
 #MUDAR
 fig = px.pie(df, names='Você costuma ler?', title='Leitura por Gênero (Homens)') #arrumar
 
+title_style = {
+    'font-family': 'Nunito',  # Defina a fonte desejada aqui
+    'font-size': '40px',  # Tamanho da fonte
+    'font-weight': 'bold', # Peso da fonte (opcional)
+    'color': '#28B465'
+    }
+
 graphic.layout = html.Div(children=[
-    html.H1(children='Máquina de Gráficos'),
+    children=[
+    html.Link(
+    rel='stylesheet',
+    href='https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap',
+    ),
+    html.H1(children='Máquina de Gráficos |||', style=title_style),
     
     dcc.Graph(
         id='graph',
