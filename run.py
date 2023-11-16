@@ -1,4 +1,4 @@
-import c
+import psycopg2
 
 # Dados da conexão
 HOST = "ep-fancy-frog-58641694-pooler.us-east-1.postgres.vercel-storage.com"
