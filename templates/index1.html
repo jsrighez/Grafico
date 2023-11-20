@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta de Cadastros</title>
+    <style>
+        /* Mesmos estilos da tela de cadastro */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: auto;
+            width: 80%;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Consulta de Arquivos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do arquivo</th>
+                    <th>Tipo de arquivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Arquivo in Arquivos%}
+                    <tr>
+                        <td>{{ Arquivo[0] }}</td>
+                        <td>{{ Arquivo[1] }}</td>
+                        <td>{{ Arquivo[2] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('arquivo') }}">Cadastrar Novo Cadastro</a>
+    </div>
+</body>
+</html>

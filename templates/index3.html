@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta de Cadastros</title>
+    <style>
+        /* Mesmos estilos da tela de cadastro */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: auto;
+            width: 80%;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Consulta de Dados do Grafico Pizza</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo_d1</th>
+                    <th>Titulo_d2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for User in Users %}
+                    <tr>
+                        <td>{{ User[0] }}</td>
+                        <td>{{ User[1] }}</td>
+                        <td>{{ User[2] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('grafico_p') }}">Cadastrar Novo Cadastro</a>
+    </div>
+</body>
+</html>

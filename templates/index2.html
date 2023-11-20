@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta de Cadastros</title>
+    <style>
+        /* Mesmos estilos da tela de cadastro */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: auto;
+            width: 80%;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Consulta de Dados_Grafico</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo_g</th>
+                    <th>Tipo_g</th>
+                    <th>Dado_1</th>
+                    <th>Dado_2</th>
+                    <th>Condição 1</th>
+                    <th>Condição 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for User in Users %}
+                    <tr>
+                        <td>{{ User[0] }}</td>
+                        <td>{{ User[1] }}</td>
+                        <td>{{ User[2] }}</td>
+                        <td>{{ User[3] }}</td>
+                        <td>{{ User[4] }}</td>
+                        <td>{{ User[5] }}</td>
+                        <td>{{ User[6] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('dados_g') }}">Cadastrar Novo Cadastro</a>
+    </div>
+</body>
+</html>

@@ -72,3 +72,28 @@ create table Grafico_pizza1(
   primary key(piz1cod,dgcodp1),
   foreign key(dgcodp1) references Dados_Grafico(dgcod)
 );
+
+'''def index1():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Arquivo")
+    arquivos = cursor.fetchall()
+    conn.close()
+    return render_template('index1.html', Arquivo=arquivos)
+
+@app.route('/Users', methods=['GET', 'POST'])
+def arquivo():
+    if request.method == 'POST':
+        nome_arquivo= request.form['nome_arquivo']
+        tipo_arq = request.form['tipo_arq']
+
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO Arquivo (nome_arquivo, tipo_arq) VALUES (?, ?)", (nome_arquivo, tipo_arq))
+        conn.commit()
+        conn.close()
+        
+        return redirect(url_for('arquivo'))
+
+    return render_template('t_arquivos.html')
+'''
