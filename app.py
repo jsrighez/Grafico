@@ -41,7 +41,7 @@ def user():
         
         return redirect(url_for('user'))
 
-    return render_template('t_login.html')
+    return render_template('User.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
